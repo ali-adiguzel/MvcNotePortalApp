@@ -1,0 +1,83 @@
+﻿@helper LinkButton(string id = "", string name = "", string url = "#", string color = "primary", string additionalClass = "", string title = "", string icon = "", string text = "Buton")
+{
+    <a href="@url" id="@id" name="@name" class="btn btn-@color @additionalClass" title="@title">
+        <span class="bi bi-@icon"></span> @text
+    </a>
+}
+
+@helper Button(string id = "", string name = "", string url = "#", string color = "primary", string additionalClass = "", string typ = "", string icon = "", string text = "Buton")
+{
+    <button id="@id" type="@typ" name="@name" class="btn btn-@color @additionalClass">
+        <span class="bi bi-@icon"></span> @text
+    </button>
+}
+
+@helper ModalPopMix(string id = "myModal", string title = "Modal Title", bool showCloseButton = true)
+{
+    <!-- Modal -->
+    <div class="modal fade" id="@id" tabindex="-1" aria-labelledby="@(id + "_label")" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="height:80%;">
+            <div class="modal-content">
+                <div class="modal-header" id="@(id + "_header")">
+                    <div class="col-md-7">
+                        <h5 class="modal-title ps-4" id="@(id + "_label")">@title</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="modal-title ps-2">Yorumlar</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height:100%;" id="@(id + "_body")">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="overflow-auto" style="width:100%;" id="@(id + "_modalNoteBody")">
+                                </div>
+                            </div>
+                            <div class="col-md-5" style="border-left:solid; border-color:lightgrey; border-left-width:thin;">
+                                <div class="overflow-auto" id="@(id + "_modalCommentBody")">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="@(id + "_footer")">
+                    <div class="d-flex">
+
+                        @if (Session["login"] != null)
+                        {
+                            <div class="input-group me-2">
+                                <input id="new_comment_text" type="text" class="form-control" style="width:400px;" placeholder="Yorumunuzu yazın..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-primary" type="button" id="button-addon2" onclick="doComment(this, 'new', -1);">Yorum Yap</button>
+                            </div>
+                        }
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@helper ModalBasic(string id = "myBasicModal", string title = "Basic Modal Title")
+{
+    <div class="modal fade" id="@id" tabindex="-1" aria-labelledby="@(id + "_label")" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="@(id + "_label")">
+                        @title
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="@(id + "_modalNoteBody")">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

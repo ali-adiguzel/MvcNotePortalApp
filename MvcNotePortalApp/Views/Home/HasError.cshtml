@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "HasError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    Exception ex = null;
+
+    if (TempData["LastError"] != null)
+    {
+        ex = TempData["LastError"] as Exception;
+    }
+}
+
+<div class="mt-5 mb-5 text-center">
+
+    <h2>Bir Hata Oluştu</h2>
+    <p class="fs-5">
+        Bir hata oluştu, lütfen site yönetimi ile iletişime geçin.
+        <br /><br />
+        @if (ex != null)
+        {
+            <strong>Hata Detayı : </strong><br />
+            @ex.Message
+            <br /><br />
+        }
+
+    </p>
+    <a href="/Home/Index" class="btn btn-primary">Ana Sayfaya Dön</a>
+    <a href="mailto:exalted305@gmail.com" class="btn btn-primary">
+        <span class="bi bi-envelope-fill"></span>
+        E-posta gönder
+    </a>
+
+</div>
+
+

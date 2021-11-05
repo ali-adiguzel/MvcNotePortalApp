@@ -1,0 +1,90 @@
+﻿@using MvcNotePortalApp.Entities
+
+@model List<Note>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .overflow-auto {
+        height: 480px;
+        width: 110%;
+        overflow-y: auto;
+    }
+
+    .editable {
+        border-color: lightskyblue;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        border-style: solid;
+        border-width: thin;
+        color: brown;
+    }
+
+    .no-outline {
+        outline: 0px solid transparent;
+    }
+</style>
+
+<h2>Notlarım</h2>
+
+<p>
+    @Bs.LinkButton("", "", "/Note/Create", "success", "mb-2", "", "plus", "Not Oluştur")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Category.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].IsDraft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].LikeCount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDraft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikeCount)
+            </td>
+            <td width="120">
+                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalComment" data-note-id="@item.Id">
+                    <span class="bi bi-chat-right-text-fill"></span>
+                </a>
+                @Bs.LinkButton("", "", $"/Note/Edit/{item.Id}", "warning", "btn-sm", "Düzenle", "pencil-fill", "")
+                @Bs.LinkButton("", "", $"/Note/Details/{item.Id}", "info", "btn-sm", "Detaylar", "info-lg", "")
+                @Bs.LinkButton("", "", $"/Note/Delete/{item.Id}", "danger", "btn-sm", "Sil", "trash-fill", "")
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Bs.ModalPopMix("modalComment", "Kullanıcının Notu")
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/comment.js"></script>

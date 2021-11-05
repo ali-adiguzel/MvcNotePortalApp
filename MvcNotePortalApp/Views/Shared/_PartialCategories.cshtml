@@ -1,0 +1,56 @@
+﻿@using MvcNotePortalApp.BusinessLayer
+@using MvcNotePortalApp.Entities
+@using MvcNotePortalApp.Models
+
+@{
+
+    List<Category> list = CacheHelper.GetCategoriesFromCache();
+
+}
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+<div class="col-md-3 position-fixed" style="width: 270px;">
+    <h4 class="ps-3">
+        <span class="bi bi-bookmarks" style="color:brown;"></span>
+        Kategoriler
+    </h4>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li>
+            <a id="allTag" href="/Home/Index" title="Tüm kategoriler" class="nav-link" aria-current="page">
+                <span class="bi bi-tags-fill"></span> &nbsp;
+                Tümü
+            </a>
+        </li>
+
+
+        @foreach (Category cat in list)
+        {
+            <li class="nav-item">
+                <a href="/Home/Index/@cat.Id" id="cat_@cat.Id" title="@cat.Description" class="nav-link link-dark" aria-current="page" >
+                    <span class="bi bi-tags-fill"></span> &nbsp;
+                    @cat.Title
+                </a>
+            </li>
+        }
+
+    </ul>
+    <hr>
+</div>
+
+<script>
+    $(function () {
+
+        if (@(ViewBag.catId) != null) {
+            var catId = @Convert.ToInt32(ViewBag.catId);
+            $("#allTag").removeClass("active");
+            $("#allTag").addClass("link-dark");
+
+            $("#cat_" + catId).removeClass("link-dark");
+            $("#cat_" + catId).addClass("active");
+        }
+
+    });
+</script>

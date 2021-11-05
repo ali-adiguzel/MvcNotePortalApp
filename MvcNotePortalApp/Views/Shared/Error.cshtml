@@ -1,0 +1,62 @@
+﻿@using MvcNotePortalApp.Entities.Messages
+
+@model MvcNotePortalApp.ViewModels.ErrorViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem; border-color:dimgray;">
+                    <div class="card-body p-5 text-center">
+
+                        <h4 style="color:red;">
+                            <span class="bi bi-x-circle"></span>
+                            @Model.Title
+                        </h4>
+
+                        <hr />
+
+                        <h5>@Model.Header</h5>
+                        
+                        <hr />
+
+                        @foreach (ErrorMessageObject msg in Model.Items)
+                        {
+                            <p class="text-justify">
+                                @msg.Message <br />
+                            </p>
+                        }
+
+                        <button class="btn btn-primary btn-lg btn-block mt-2" type="submit">Ana Sayfaya Dön</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+@if (Model.IsRedirecting == true)
+{
+    <script>
+
+        $(function () {
+
+            setTimeout(function () {
+
+                window.location = "@Model.RedirectingUrl";
+
+            }, @Model.RedirectingTimeout);
+
+        });
+
+    </script>
+}
+

@@ -1,0 +1,242 @@
+﻿@using MvcNotePortalApp.Entities
+@using MvcNotePortalApp.BusinessLayer
+@using MvcNotePortalApp.Models
+
+@model List<Note>
+
+@{
+    ViewBag.Title = "Index";
+    CategoryManager categoryManager = new CategoryManager();
+
+    List<Category> catList = categoryManager.List();
+
+    NotePortalUser user = CurrentSession.User;
+}
+
+<style>
+    .overflow-auto {
+        height: 480px;
+        width: 100%;
+        overflow-y: auto;
+    }
+
+    .editable {
+        border-color: lightskyblue;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        border-style: solid;
+        border-width: thin;
+        color: brown;
+    }
+
+    .no-outline {
+        outline: 0px solid transparent;
+    }
+</style>
+
+<!-- Page Content -->
+<!-- Sidebar -->
+<div class="col-md-3">
+
+    @Html.Partial("_PartialCategories")
+
+</div>
+
+@Bs.ModalPopMix("modalComment", "Kullanıcının Notu")
+@Bs.ModalBasic("modalNote", "Kullanıcın Notu")
+
+<div class="col-md-9">
+
+    <!-- Carousel & Buttons -->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Carousel Buttons -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="bd-placeholder-img" src="https://picsum.photos/850/300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" />
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Example headline.</h1>
+                        <p>Some representative placeholder content for the first slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="bd-placeholder-img" src="https://picsum.photos/850/300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" />
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Another example headline.</h1>
+                        <p>Some representative placeholder content for the second slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="bd-placeholder-img" src="https://picsum.photos/850/300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" />
+            </div>
+
+        </div>
+
+        <hr class="divider" />
+    </div>
+
+
+    <!-- Posts -->
+    <div class="row">
+
+        @foreach (Note note in Model)
+        {
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail mb-4">
+                    <img src="https://picsum.photos/320/150" alt="@note.Title">
+                    <div class="card">
+
+                        <h4 class="card-header ps-2 pe-2">
+                            <a href="#" class="link-dark" style="text-decoration:none;" data-bs-toggle="modal" data-bs-target="#modalNote" data-note-id="@note.Id">
+                                @note.Title
+                            </a>
+                        </h4>
+
+                        <p class="small ps-2 pe-2 pt-1 pb-0 mb-0" style="color:green;">
+                            <i class="bi bi-clock-history"></i>
+                            @note.CreatedDate.ToString("g")
+                        </p>
+
+                        <p class="card-body pt-1 pb-0 ps-2 pe-2 mb-2">
+                            @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 130)
+                            {
+                                @(note.Text.Substring(0, 130) + "...")
+                            }
+                            else
+                            {
+                                @note.Text
+                            }
+                        </p>
+
+                        <h6 class="small ps-2 pe-2 mt-0 mb-2">
+                            <span class="bi bi-person-circle"></span>
+                            @note.Owner.UserName
+                        </h6>
+
+                        <hr class="mt-0 mb-0" />
+
+                        <div class="d-flex align-bottom justify-content-between align-items-end card-body m-0 ps-1 pb-1 pt-1 pe-1">
+
+                            <a class="btn btn-outline-danger align-content-center btn-sm" id="btnComment" href="#" data-bs-toggle="modal" data-bs-target="#modalComment" data-note-id="@note.Id">
+                                @note.Comments.Count Yorum
+                            </a>
+
+                            @if (user != null)
+                            {
+                                bool userLiked = false;
+
+                                foreach (Liked like in user.Likes)
+                                {
+                                    if (like.Note.Id == note.Id)
+                                    {
+                                        <button id="btn-liked" type="button" class="btn btn-outline-danger btn-sm" data-note-liked="true" data-note-id="@note.Id" onclick="likeClick(this);">
+                                            <span id="liked-star" class="bi bi-star-fill"></span>
+                                            <span id="liked-count">@note.LikeCount</span>
+                                        </button>
+
+                                        userLiked = true;
+                                    }
+                                }
+                                if (!userLiked)
+                                {
+                                    <button id="btn-unliked" type="button" class="btn btn-outline-danger btn-sm" data-note-liked="false" data-note-id="@note.Id" onclick="likeClick(this);">
+                                        <span id="unliked-star" class="bi bi-star"></span>
+                                        <span id="unliked-count">@note.LikeCount</span>
+                                    </button>
+                                }
+                            }
+                            else
+                            {
+                                <a tabindex="0" class="btn btn-outline-danger btn-sm" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="Giriş Yapılmadı" data-bs-content="Notları beğenmek için giriş yapmanız gerekiyor.">
+                                    <span class="bi bi-star"></span>
+                                    @note.LikeCount
+                                </a>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script src="~/Scripts/popper.min.js"></script>
+<script src="~/Scripts/comment.js"></script>
+<script src="~/Scripts/note.js"></script>
+
+<script>
+
+    function likeClick(btn) {
+        var noteId = $(btn).data("note-id");
+        console.log(noteId);
+        var liked = $(btn).data("note-liked");
+
+        var spanStarLiked = $(btn).find("#liked-star");
+        var spanCountLiked = $(btn).find("#liked-count");
+        var spanStarUnliked = $(btn).find("#unliked-star");
+        var spanCountUnliked = $(btn).find("#unliked-count");
+
+        $.ajax({
+            method: "POST",
+            url: "/Note/SetLikeStatus",
+            data: { "noteId": noteId, "liked": !liked }
+        }).done(function (datas) {
+
+            if (datas.hasError) {
+                alert(datas.errorMessage);
+            } else {
+                liked = !liked;
+                $(btn).data("note-liked", liked);
+                spanCountLiked.text(datas.result);
+                spanCountUnliked.text(datas.result);
+
+                spanStarLiked.removeClass("bi-star-fill");
+                spanStarLiked.removeClass("bi-star");
+
+                spanStarUnliked.removeClass("bi-star");
+                spanStarUnliked.removeClass("bi-star-fill");
+
+                if (liked) {
+                    spanStarLiked.addClass("bi-star-fill");
+                    spanStarUnliked.addClass("bi-star-fill");
+                } else {
+                    spanStarLiked.addClass("bi-star");
+                    spanStarUnliked.addClass("bi-star");
+                }
+            }
+
+        }).fail(function () {
+            alert("Sunucu ile bağlantı kurulamadı.");
+        });
+    }
+
+    $(function () {
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    });
+
+</script>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>

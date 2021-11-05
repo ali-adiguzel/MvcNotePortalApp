@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.WebApp", "MvcNotePortalApp\MvcNotePortalApp.WebApp.csproj", "{C793330B-2820-4A38-B1E2-DAE2B9D29911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.BusinessLayer", "MvcNotePortalApp.BusinessLayer\MvcNotePortalApp.BusinessLayer.csproj", "{57191F7F-B6CE-4ED9-AD60-AC191D0EEEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.DataAccessLayer", "MvcNotePortalApp.DataAccess\MvcNotePortalApp.DataAccessLayer.csproj", "{37FDB786-FFC3-456D-A4C7-E39BA739E84E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.Entities", "MvcNotePortalApp.Entities\MvcNotePortalApp.Entities.csproj", "{52B12B7F-B6C8-4506-A4B9-96E2A154DE04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.Common", "MvcNotePortalApp.Common\MvcNotePortalApp.Common.csproj", "{3F13D996-12B1-4F30-AF9E-259466695780}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcNotePortalApp.Core", "MvcNotePortalApp.Core\MvcNotePortalApp.Core.csproj", "{B88EF3FC-EC75-4E19-8B68-A98F7267448C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C793330B-2820-4A38-B1E2-DAE2B9D29911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C793330B-2820-4A38-B1E2-DAE2B9D29911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C793330B-2820-4A38-B1E2-DAE2B9D29911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C793330B-2820-4A38-B1E2-DAE2B9D29911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57191F7F-B6CE-4ED9-AD60-AC191D0EEEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57191F7F-B6CE-4ED9-AD60-AC191D0EEEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57191F7F-B6CE-4ED9-AD60-AC191D0EEEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57191F7F-B6CE-4ED9-AD60-AC191D0EEEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37FDB786-FFC3-456D-A4C7-E39BA739E84E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FDB786-FFC3-456D-A4C7-E39BA739E84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FDB786-FFC3-456D-A4C7-E39BA739E84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FDB786-FFC3-456D-A4C7-E39BA739E84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B12B7F-B6C8-4506-A4B9-96E2A154DE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B12B7F-B6C8-4506-A4B9-96E2A154DE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B12B7F-B6C8-4506-A4B9-96E2A154DE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B12B7F-B6C8-4506-A4B9-96E2A154DE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F13D996-12B1-4F30-AF9E-259466695780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F13D996-12B1-4F30-AF9E-259466695780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F13D996-12B1-4F30-AF9E-259466695780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F13D996-12B1-4F30-AF9E-259466695780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B88EF3FC-EC75-4E19-8B68-A98F7267448C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B88EF3FC-EC75-4E19-8B68-A98F7267448C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B88EF3FC-EC75-4E19-8B68-A98F7267448C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B88EF3FC-EC75-4E19-8B68-A98F7267448C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B13D4314-9C02-40CA-8538-37FEE9A4C622}
+	EndGlobalSection
+EndGlobal

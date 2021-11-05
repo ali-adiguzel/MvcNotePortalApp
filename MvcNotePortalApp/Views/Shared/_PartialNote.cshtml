@@ -1,0 +1,19 @@
+﻿@using MvcNotePortalApp.Entities
+
+@model Note
+
+<div class="d-flex flex-column">
+    <h3>@Model.Title</h3>
+    <hr class="mt-0 mb-2" />
+    <div class="d-flex justify-content-end mt-0 mb-0">
+        <img src="~/Images/@Model.Owner.ProfileImageFile" alt="profil_resmi" width="25" height="22" />
+        <h5 class="ms-2 me-1">@Model.Owner.UserName</h5>
+    </div>
+    <div class="d-flex mt-0">
+        <p class="fs-5">@Model.Text</p>
+    </div>
+    <div class="d-flex text-success">
+        <span class="bi bi-clock-history"></span>
+        &nbsp;@Model.ModifiedDate
+    </div>
+</div>

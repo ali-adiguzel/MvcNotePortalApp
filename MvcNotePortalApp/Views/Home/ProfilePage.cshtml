@@ -1,0 +1,75 @@
+﻿@using MvcNotePortalApp.Entities
+@model NotePortalUser
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/popper.min.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+<div class="container">
+
+    <div class="row">
+        <h2>Profil</h2>
+        <hr />
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <img class="img-circle" src="~/Images/@Model.ProfileImageFile" alt="Profil Resmi"
+                 style="width:115px; height:95px;" />
+        </div>
+
+        <div class="col-md-8">
+            <h3>@(Model.Name + " " + Model.Surname)</h3>
+            <br />
+            <table class="table-borderless">
+                <tbody>
+                    <tr>
+                        <th scope="row">Kullanıcı Adı &nbsp;&nbsp;</th>
+                        <td><b>: &nbsp;</b></td>
+                        <td>@Model.UserName</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-Posta </th>
+                        <td><b>:</b></td>
+                        <td>@Model.Email</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br />
+
+            <h6><a href="#"><b>Daha fazla...</b></a></h6>
+        </div>
+
+        <div class="col-md-2 text-right">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="bi bi-gear"></span>
+                    Ayarlar
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <a class="dropdown-item" href="/Home/EditProfile">
+                            <span class="bi bi-pencil-square"></span>
+                            Düzenle
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item text-danger" href="/Home/RemoveProfile"
+                           onclick="return confirm('Hesabınızı silmek istediğinizden emin misini?');">
+                            <span class="bi bi-trash"></span>
+                            Hesabı Sil
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>

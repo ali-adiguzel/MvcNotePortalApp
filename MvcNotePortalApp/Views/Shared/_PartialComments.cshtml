@@ -1,0 +1,43 @@
+﻿@using MvcNotePortalApp.Entities
+@using MvcNotePortalApp.Models
+
+@model List<Comment>
+
+@{
+    NotePortalUser user = CurrentSession.User;
+}
+
+@foreach (Comment item in Model)
+{
+    <div class="d-flex flex-column mb-2 pe-1" style="border-bottom-style:solid; border-bottom-width:thin; border-color:lightgray;">
+        <div class="d-flex">
+            <img src="~/Images/@item.Owner.ProfileImageFile" alt="profil_resmi" width="25" height="22">
+            <h5 class="ms-2">@item.Owner.UserName</h5>
+        </div>
+        <div class="flex-grow-1">
+            <div>
+                <span id="comment_text_@item.Id" contenteditable="false">
+                    @item.Text
+                </span>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="pb-2 pt-1 bd-highlight">
+                    <small class="text-success small">
+                        <span class="bi bi-clock-history"></span> @item.ModifiedDate
+                    </small>
+                </div>
+                @if (user != null && item.Owner.Id == user.Id)
+                {
+                    <div class="pb-2 pt-2 bd-highlight form-actions no-color">
+                        <button class="btn btn-warning btn-sm" data-edit-mode="false" onclick="doComment(this, 'edit',@item.Id,'#comment_text_@item.Id');">
+                            <span class="bi bi-pencil-fill"></span>
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="doComment(this, 'delete',@item.Id);">
+                            <span class="bi bi-x"></span>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
