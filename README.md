@@ -1,4 +1,15 @@
-# NotePortal Web Versiyonu
-NotePortal, kişilerin online olarak notlarını portalda paylaşması ve diğerlerinin notlarını görmesi, yorum yapması ve beğenmesi üzerine kurulu sosyal bir not alma platformudur.
+# NotePortal Web Version
+NotePortal is a social note-taking platform based on people sharing their notes online on the portal and seeing, commenting and liking the notes of others.
 
-*Bu proje, NotePortal'ın Asp.Net Mvc ile yapılmış web versiyonudur.*
+*This project is the web version of NotePortal made with Asp.Net Mvc.*
+
+## Technologies and Structures
+- Layered enterprise architecture infrastructure
+- Asp.Net MVC
+- Crud operations with Entity Framework
+- Relational sql database
+- Authentication and authorization processes
+- Client side and server side validations
+- Dependency Injection principle
+- Singleton design pattern
+- Repository design pattern
